@@ -134,6 +134,15 @@ const gameLogic = {
   resetGame() {
     gameBoard.pieces.forEach(gameLogic.clearPieces);
   },
+
+  checkTie() {
+    let test = (currentValue) => currentValue == "X" || currentValue == "O";
+    if (gameBoard.pieces.every(test)) {
+      this.displayPieces();
+      alert("It is a tie");
+      this.resetGame();
+    }
+  },
 };
 
 const winBoxes = [
@@ -158,6 +167,7 @@ containerModule.bodyContainer.addEventListener("click", function (event) {
       gameLogic.displayPieces();
       gameLogic.pushIndex();
       gameLogic.checkWinner();
+      gameLogic.checkTie();
       gameLogic.switchPlayer();
       console.log(gameBoard);
     }
